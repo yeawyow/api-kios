@@ -82,6 +82,9 @@ func getpatient(c *gin.Context){
 		return
 	}
 	c.JSON(200,Patient)
+	/*c.JSON(200, gin.H{
+		"patient":Patient,
+	})*/
 }
 
 
