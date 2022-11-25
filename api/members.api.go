@@ -76,15 +76,17 @@ func getpatient(c *gin.Context){
 	var Patient []model.Patient
 	id := c.Param("id")
 	
-	tx:=db.GetDB().Where("cid =?",id).First(&Patient)
-	if tx.Error !=nil{
-		fmt.Println(tx.Error)
-		return
-	}
+if 	tx:=db.GetDB().Where("cid =?",id).First(&Patient).Error; tx != nil{
+   c.JSON(200,gin.H{"result":"nodata","error":tx})
+} else{
 	c.JSON(200,Patient)
 	/*c.JSON(200, gin.H{
 		"patient":Patient,
 	})*/
+}
+
+	
+	
 }
 
 
