@@ -15,32 +15,18 @@ func setupMembersAPI(router *gin.Engine) {
 	authenAPI := router.Group("/api")
 	{
 
-		authenAPI.GET("/edituser", edituser)
+		
 		authenAPI.GET("/getmembers", getmembers)
 		authenAPI.POST("/register", register)
 		authenAPI.GET("/getpatient/:id", getpatient)
 		authenAPI.GET("/gettest", gettest)
+		authenAPI.GET("/getoapp/:hn", getoapp)
 	
 	}
 }
 
-func getmembers(c *gin.Context) {
-	var PsMember []model.User
 
-	tx := db.GetDB().Find(&PsMember)
-	if tx.Error !=nil{
-		fmt.Println(tx.Error)
-		return
-	}
-	c.JSON(200,PsMember)
-//c.JSON(200, gin.H{"data":PsMember})
-}
 
-func edituser(c *gin.Context) {
-	c.JSON(200, gin.H{
-		"test": "test",
-	})
-}
 
 func register(c *gin.Context){
 
@@ -76,10 +62,27 @@ func getpatient(c *gin.Context){
 	var Patient []model.Patient
 	id := c.Param("id")
 	
+	
 if 	tx:=db.GetDB().Where("cid =?",id).First(&Patient).Error; tx != nil{
-   c.JSON(200,gin.H{"result":"nodata","error":tx})
+   c.JSON(200,gin.H{"result":"","error":tx})
 } else{
-	c.JSON(200,Patient)
+	c.JSON(http.StatusOK,gin.H{"result":Patient})
+	/*c.JSON(200, gin.H{
+		"patient":Patient,
+	})*/
+}
+
+	
+	
+}
+func getoapp(c *gin.Context){
+	var Oapp []model.Oapp
+	id := c.Param("hn")
+	
+if 	tx:=db.GetDB().Where("hn =?",id).First(&Oapp).Error; tx != nil{
+   c.JSON(200,gin.H{"result":"","error":tx})
+} else{
+	c.JSON(http.StatusOK,gin.H{"result":Oapp})
 	/*c.JSON(200, gin.H{
 		"patient":Patient,
 	})*/
