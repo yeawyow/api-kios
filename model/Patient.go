@@ -12,6 +12,7 @@ type Patient struct {
 	Lname    string
 	Birthday time.Time
 	Cid string `json:"cid"`
+	Hometel string `gorm:"home_tel"`
 
 
 }
