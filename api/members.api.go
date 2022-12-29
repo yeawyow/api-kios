@@ -16,8 +16,9 @@ func setupMembersAPI(router *gin.Engine) {
 	{
 
 		
-		authenAPI.GET("/getmembers", getmembers)
+		//authenAPI.GET("/getmembers", getmembers)
 		authenAPI.POST("/register", register)
+		authenAPI.POST("/registvisit", regvisit)
 		authenAPI.GET("/getpatient/:id", getpatient)
 		authenAPI.GET("/gettest", gettest)
 		authenAPI.GET("/getoapp/:hn", getoapp)
@@ -26,7 +27,11 @@ func setupMembersAPI(router *gin.Engine) {
 }
 
 
-
+func regvisit(c *gin.Context){
+	//var ovst model.Ovst
+	//db.GetDB()
+	c.JSON(200,gin.H{"ok":"ok"})
+}
 
 func register(c *gin.Context){
 
