@@ -9,7 +9,7 @@ import (
 func Setup(router *gin.Engine) {
 
 	db.SetupDB()
-	setupIptAPI(router)
+
 	setupAuthenAPI(router)
-	setupMembersAPI(router)
+	setupHosxpAPI(router)
 }

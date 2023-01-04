@@ -10,20 +10,21 @@ import (
 	"github.com/joho/godotenv"
 )
 
-func main(){
- err := godotenv.Load(".env")
- if err !=nil {
-	fmt.Println("Error loading .env file")
- }
+func main() {
+	err := godotenv.Load(".env")
+	if err != nil {
+		fmt.Println("Error loading .env file")
+	}
+	gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()
 	//setup CORS midleware Option
 	config := cors.Config{
-		Origins:        "*",
-		Methods:        "GET, PUT, POST, DELETE",
-		RequestHeaders: "Origin, Authorization, Content-Type",
-		ExposedHeaders: "",
-		MaxAge: 50 * time.Second,
-		Credentials: false,
+		Origins:         "*",
+		Methods:         "GET, PUT, POST, DELETE",
+		RequestHeaders:  "Origin, Authorization, Content-Type",
+		ExposedHeaders:  "",
+		MaxAge:          50 * time.Second,
+		Credentials:     false,
 		ValidateHeaders: false,
 	}
 	router.Use(cors.Middleware(config))
